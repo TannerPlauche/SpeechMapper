@@ -18,7 +18,11 @@ function receiveAudio(stream) {
 
   processor.onaudioprocess = function(e) {
     // console.log(e.inputBuffer.getChannelData(0));
-    display.textContent = JSON.stringify(e.inputBuffer.getChannelData(0));
+    var dft = new DFT(1024, 44100);
+    dft.forward(e.inputBuffer.getChannelData(0));
+    var spectrum = dft.spectrum;
+    display.textContent = JSON.stringify(spectrum);
+    console.log("spectrum: ", spectrum);
   };
 
   document.getElementById("stopAudio").addEventListener("click", function() {
