@@ -1,3 +1,5 @@
+// resourced from https://github.com/corbanbrook/dsp.js
+
 /* 
  *  DSP.js - a comprehensive digital signal processing  library for javascript
  * 
