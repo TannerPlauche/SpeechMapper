@@ -8,5 +8,6 @@
 ### If you train for minimal pairs (two vowels), only 5-10 minutes needed to train model.
 
 Makes use of:
-[JavaScript Digitial Signal Processing](https://github.com/corbanbrook/dsp.js/)
-[Brain.js for neural network machine learning](https://github.com/BrainJS/brain.js)
+
+* [JavaScript Digitial Signal Processing](https://github.com/corbanbrook/dsp.js/)
+* [Brain.js for neural network machine learning](https://github.com/BrainJS/brain.js)
