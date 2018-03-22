@@ -3,17 +3,24 @@ let style = body.style;
 
 let model;
 
-let modelLoader = setInterval(trainModel(), 300);
+let modelLoader = setInterval(trainModel, 300);
 
 function trainModel() {
-    if(brain) {
-        model = new brain.NeuralNetwork();
-        model.train(trainingData);
+    if (brain) {
+        console.log(brain);
+        model = new brain.NeuralNetwork({
+            activation: 'sigmoid', // activation function
+            hiddenLayers: [4],
+            learningRate: 0.6 // global learning rate, useful when training using streams
+        });
+        // model.train(trainingData);
+        model.trainAsync(trainingData)
+            .then(function () {
+                alert("Training done! You are ready to test!")
+            });
         clearInterval(modelLoader);
     }
 }
-
-
 
 
 function audioError(err) {
@@ -53,14 +60,16 @@ function receiveAudio(stream) {
         fft.forward(e.inputBuffer.getChannelData(0));
         var spectrum = fft.spectrum;
 
-        if (spectrum[0] < 0.001) {
-            style.backgroundColor = "red";
-        } else {
-            style.backgroundColor = "white";
-        }
+        // if (spectrum[0] < 0.001) {
+        //     style.backgroundColor = "red";
+        // } else {
+        //     style.backgroundColor = "white";
+        // }
         console.log(model.run(spectrum));
-        display.textContent = JSON.stringify(spectrum);
-        console.log("spectrum: ", spectrum);
+        console.log(model.run(spectrum));
+        // display.textContent = JSON.stringify(spectrum);
+        display.textContent = brain.likely(spectrum, model);
+        // console.log("spectrum: ", spectrum);
     };
 
     function changeFreq() {
