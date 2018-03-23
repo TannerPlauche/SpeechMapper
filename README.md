@@ -1,10 +1,10 @@
-# This is an experiment combining the web audio api and machine learning / artificial intelligence in the broweser
+# This is an experiment combining the web audio api and machine learning / artificial intelligence in the browser
 
 ## Currently a hot mess of code. This is version is part of the learning process.
 
 ### No transpiling needed.
 
-### There is no currently no stored model. If you train for all current vowel training data, it takes at least 30 minutes.
+### There is currently no stored model. If you train for all current vowel training data, it takes at least 30 minutes.
 ### If you train for minimal pairs (two vowels), only 5-10 minutes needed to train model.
 
 Makes use of:
