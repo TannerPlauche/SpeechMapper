@@ -1,19 +1,31 @@
 let body = document.querySelector("body");
 let style = body.style;
 let model; // model is global
+checkModel();
 let modelLoader = setInterval(trainModel, 300);
+
+function checkModel() {
+    let mode = localStorage.getItem('model');
+
+    if (model) {
+        alert('model found!');
+        console.log(JSON.parse(model));
+    } else {
+        alert('no model found');
+    }
+}
 
 function trainModel() {
     if (brain) {
-        console.log(brain);
         model = new brain.NeuralNetwork({
             activation: 'sigmoid', // activation function
             hiddenLayers: [4], // 1 hidden by default
             learningRate: 0.6 // global learning rate, useful when training using streams
         });
-        // model.train(trainingData);
+
         model.trainAsync(trainingData)
-            .then(function () {
+            .then(function (model) {
+                localStorage.setItem('model', JSON.stringify(model));
                 alert("Training done! You are ready to test!")
             });
         clearInterval(modelLoader);
@@ -73,3 +85,6 @@ function getUserMedia() {
         .apply(navigator, arguments);
 }
 
+function getAudio() {
+    getUserMedia({ audio: true }, receiveAudio, audioError);
+  }
